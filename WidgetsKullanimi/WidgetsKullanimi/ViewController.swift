@@ -17,19 +17,29 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
-  
     @IBOutlet weak var segmentController: UISegmentedControl!
+    
+    @IBOutlet weak var labelSlider: UILabel!
+    
+    @IBOutlet weak var slider: UISlider!
+    
+    @IBOutlet weak var labelStepper: UILabel!
+    
+    @IBOutlet weak var stepper: UIStepper!
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+        labelSlider.text = String(Int(slider.value))
+        indicator.isHidden = true
 
-    
+    }
     
     @IBAction func buttonYap(_ sender: Any) {
         if let alinanVeri = textFieldGirdi.text {
             labelSonuc.text = alinanVeri
-            
+        
         }
     }
    
@@ -57,9 +67,32 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func sliderDegisim(_ sender: UISlider) {
+        labelSlider.text = String(Int(sender.value))
+    }
+    
+    
+    @IBAction func stepperDegisim(_ sender: UIStepper) {
+        labelSlider.text = String(Int(sender.value))
+    }
+    
+    @IBAction func buttonBasla(_ sender: Any) {
+        indicator.isHidden = false
+        indicator.startAnimating()
+    }
+    
+    
+    @IBAction func buttonDur(_ sender: Any) {
+        indicator.isHidden = true
+        indicator.stopAnimating()
+    }
+    
+    
+    
     @IBAction func buttonGoster(_ sender: Any) {
         print("Switch Durum : \(mSwitch.isOn)")
-        
+        print("Slider Durum: \(slider.value)")
+        print("Stepper Durum : \(stepper.value)")
     }
     
 }
