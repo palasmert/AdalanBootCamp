@@ -14,21 +14,21 @@ class AnaSayfa: UIViewController {
     @IBOutlet weak var kisilerTableView: UITableView!
     var kisilerListesi = [Kisiler]()
     
+    var viewModel = AnasayfaViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         kisilerTableView.delegate = self
         kisilerTableView.dataSource = self
          
-        let k1 = Kisiler(kisi_id: 1, kisi_ad: "ahmet", kisi_tel: "123321")
-        let k2 = Kisiler(kisi_id: 2, kisi_ad: "beyza", kisi_tel: "222222")
-        let k3 = Kisiler(kisi_id: 3, kisi_ad: "can", kisi_tel: "333333")
-        kisilerListesi.append(k1)
-        kisilerListesi.append(k2)
-        kisilerListesi.append(k3)
+        _ = viewModel.kisilerListesi.subscribe(onNext: { liste in
+            self.kisilerListesi = liste
+            self.kisilerTableView.reloadData()
+        })
     }
     override func viewWillAppear(_ animated: Bool) {
-        print("Ana sayfaya döndük")
+        viewModel.kisileriYukle()
     }
     
     
@@ -46,7 +46,7 @@ class AnaSayfa: UIViewController {
 }
 extension AnaSayfa : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Kişi ara : \(searchText)")
+        viewModel.ara(aramaKelimesi: searchText)
     }
 }
 extension AnaSayfa : UITableViewDelegate,UITableViewDataSource {
@@ -79,7 +79,7 @@ extension AnaSayfa : UITableViewDelegate,UITableViewDataSource {
             alert.addAction(iptalAction)
             
             let evetAction = UIAlertAction(title: "Evet", style: .destructive) { action in
-                print("Kisi sil :\(kisi.kisi_id!)")
+                self.viewModel.siil(kisi_id: kisi.kisi_id!)
             }
             alert.addAction(evetAction)
             self.present(alert, animated: true)

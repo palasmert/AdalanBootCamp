@@ -17,6 +17,11 @@
 		61CD39612B96F56200D4DBF0 /* KisiDetay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD39602B96F56200D4DBF0 /* KisiDetay.swift */; };
 		61CD39632B96F5F400D4DBF0 /* Kisiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD39622B96F5F400D4DBF0 /* Kisiler.swift */; };
 		61CD39662B97271D00D4DBF0 /* KisilerHucre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CD39652B97271D00D4DBF0 /* KisilerHucre.swift */; };
+		61EFB3492BA3153200BFCE23 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 61EFB3482BA3153200BFCE23 /* RxSwift */; };
+		61EFB34C2BA3158300BFCE23 /* KisilerDaoRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EFB34B2BA3158300BFCE23 /* KisilerDaoRepo.swift */; };
+		61EFB34F2BA315BA00BFCE23 /* AnasayfaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EFB34E2BA315BA00BFCE23 /* AnasayfaViewModel.swift */; };
+		61EFB3512BA315DE00BFCE23 /* KisiKayitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EFB3502BA315DE00BFCE23 /* KisiKayitViewModel.swift */; };
+		61EFB3532BA315F600BFCE23 /* KisiDetayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EFB3522BA315F600BFCE23 /* KisiDetayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,10 @@
 		61CD39602B96F56200D4DBF0 /* KisiDetay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiDetay.swift; sourceTree = "<group>"; };
 		61CD39622B96F5F400D4DBF0 /* Kisiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kisiler.swift; sourceTree = "<group>"; };
 		61CD39652B97271D00D4DBF0 /* KisilerHucre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisilerHucre.swift; sourceTree = "<group>"; };
+		61EFB34B2BA3158300BFCE23 /* KisilerDaoRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisilerDaoRepo.swift; sourceTree = "<group>"; };
+		61EFB34E2BA315BA00BFCE23 /* AnasayfaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnasayfaViewModel.swift; sourceTree = "<group>"; };
+		61EFB3502BA315DE00BFCE23 /* KisiKayitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiKayitViewModel.swift; sourceTree = "<group>"; };
+		61EFB3522BA315F600BFCE23 /* KisiDetayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiDetayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EFB3492BA3153200BFCE23 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +89,7 @@
 		61CD395A2B96F4B500D4DBF0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				61EFB34A2BA3156500BFCE23 /* Repo */,
 				61CD395C2B96F4E500D4DBF0 /* Entity */,
 			);
 			path = Data;
@@ -87,6 +98,7 @@
 		61CD395B2B96F4CC00D4DBF0 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				61EFB34D2BA315A300BFCE23 /* ViewModel */,
 				61CD39642B9726F800D4DBF0 /* TableView */,
 				61CD395D2B96F4F300D4DBF0 /* Views */,
 			);
@@ -119,6 +131,24 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		61EFB34A2BA3156500BFCE23 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				61EFB34B2BA3158300BFCE23 /* KisilerDaoRepo.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		61EFB34D2BA315A300BFCE23 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				61EFB34E2BA315BA00BFCE23 /* AnasayfaViewModel.swift */,
+				61EFB3502BA315DE00BFCE23 /* KisiKayitViewModel.swift */,
+				61EFB3522BA315F600BFCE23 /* KisiDetayViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +165,9 @@
 			dependencies = (
 			);
 			name = KisilerUygulamasi;
+			packageProductDependencies = (
+				61EFB3482BA3153200BFCE23 /* RxSwift */,
+			);
 			productName = KisilerUygulamasi;
 			productReference = 618240602B967F4800D32A27 /* KisilerUygulamasi.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +196,9 @@
 				Base,
 			);
 			mainGroup = 618240572B967F4700D32A27;
+			packageReferences = (
+				61EFB3472BA3153200BFCE23 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 618240612B967F4800D32A27 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -194,9 +230,13 @@
 				61CD39662B97271D00D4DBF0 /* KisilerHucre.swift in Sources */,
 				61CD39612B96F56200D4DBF0 /* KisiDetay.swift in Sources */,
 				618240682B967F4800D32A27 /* AnaSayfa.swift in Sources */,
+				61EFB34C2BA3158300BFCE23 /* KisilerDaoRepo.swift in Sources */,
+				61EFB34F2BA315BA00BFCE23 /* AnasayfaViewModel.swift in Sources */,
+				61EFB3532BA315F600BFCE23 /* KisiDetayViewModel.swift in Sources */,
 				618240642B967F4800D32A27 /* AppDelegate.swift in Sources */,
 				618240662B967F4800D32A27 /* SceneDelegate.swift in Sources */,
 				61CD39632B96F5F400D4DBF0 /* Kisiler.swift in Sources */,
+				61EFB3512BA315DE00BFCE23 /* KisiKayitViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +459,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		61EFB3472BA3153200BFCE23 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		61EFB3482BA3153200BFCE23 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61EFB3472BA3153200BFCE23 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 618240582B967F4700D32A27 /* Project object */;
 }
