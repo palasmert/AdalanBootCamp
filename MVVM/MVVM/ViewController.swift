@@ -13,28 +13,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var textFieldSayi1: UITextField!
     @IBOutlet weak var textFieldSayi2: UITextField!
     
+    var viewModel = AnasayfaViewModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelSonuc.text = "0"
+        _ = viewModel.sonuc.subscribe(onNext: { s in
+            self.labelSonuc.text = s
+        })
     }
     
     
     @IBAction func buttonToplama(_ sender: Any) {
         if let alinanSayi1 = textFieldSayi1.text, let alinanSayi2 = textFieldSayi2.text{
-            if let sayi1 = Int(alinanSayi1), let sayi2 = Int(alinanSayi2) {
-                let toplam = sayi1 + sayi2
-                labelSonuc.text = String(toplam)
-            }
+            viewModel.toplamaYap(alinanSayi1: alinanSayi1, alinanSayi2: alinanSayi2)
+            
         }
     }
     
     @IBAction func buttonCarpma(_ sender: Any) {
-        if let alinanSayi1 = textFieldSayi1.text, let alinanSayi2 = textFieldSayi2.text{
-            if let sayi1 = Int(alinanSayi1), let sayi2 = Int(alinanSayi2) {
-                let carpma = sayi1 * sayi2
-                labelSonuc.text = String(carpma)
-            }
+       if let alinanSayi1 = textFieldSayi1.text, let alinanSayi2 = textFieldSayi2.text{
+            viewModel.carpmaYap(alinanSayi1: alinanSayi1, alinanSayi2: alinanSayi2)
+            
         }
     }
     
