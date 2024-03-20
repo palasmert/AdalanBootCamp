@@ -9,31 +9,96 @@ import Foundation
 import RxSwift
 
 class KisilerDaoRepo {
+    var kisilerListesi = BehaviorSubject<[Kisiler]>(value: [Kisiler]())
     
-    var kisilerListesi = BehaviorSubject<[Kisiler]>(value:  [Kisiler]())
+    let db:FMDatabase?
     
-    func kaydet(kisi_ad:String, kisi_tel:String){
-        print("Kişi Kaydet : \(kisi_ad) - \(kisi_tel)")
+    init(){
+        let hedefYol = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let veritabaniURL = URL(fileURLWithPath: hedefYol).appendingPathComponent("rehber.sqlite")
+        db = FMDatabase(path: veritabaniURL.path)
     }
-    func guncelle(kisi_id: Int, kisi_ad:String,kisi_tel:String) {
-        print("Kisi güncelle : \(kisi_id) -\(kisi_ad) - \(kisi_tel)")
-    }
-    func siil(kisi_id:Int){
-     print("Kisi sil : \(kisi_id)")
-        kisileriYukle()
+    
+    func kaydet(kisi_ad:String,kisi_tel:String){
+        db?.open()
         
+        do{
+            try db!.executeUpdate("INSERT INTO kisiler (kisi_ad,kisi_tel) VALUES (?,?)", values: [kisi_ad,kisi_tel])
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
-    func ara(aramaKelimesi:String) {
-        print("Kişi ara: \(aramaKelimesi)")
+    
+    func guncelle(kisi_id:Int,kisi_ad:String,kisi_tel:String){
+        db?.open()
+        
+        do{
+            try db!.executeUpdate("UPDATE kisiler SET kisi_ad = ?,kisi_tel = ? WHERE kisi_id = ?", values: [kisi_ad,kisi_tel,kisi_id])
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
+    
+    func sil(kisi_id:Int){
+        db?.open()
+        
+        do{
+            try db!.executeUpdate("DELETE FROM kisiler WHERE kisi_id = ?", values: [kisi_id])
+            kisileriYukle()
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
+    }
+    
+    func ara(aramaKelimesi:String){
+        db?.open()
+        var liste = [Kisiler]()
+        
+        do{
+            let rs = try db!.executeQuery("SELECT * FROM kisiler WHERE kisi_ad like '%\(aramaKelimesi)%'", values: nil)
+            
+            while rs.next() {
+                let kisi = Kisiler(kisi_id: Int(rs.string(forColumn: "kisi_id"))!,
+                                   kisi_ad: rs.string(forColumn: "kisi_ad")!,
+                                   kisi_tel: rs.string(forColumn: "kisi_tel")!)
+                
+                liste.append(kisi)
+            }
+            
+            kisilerListesi.onNext(liste)//Tetikleme
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
+    }
+    
     func kisileriYukle(){
-       var liste = [Kisiler]()
-       let k1 = Kisiler(kisi_id: 1, kisi_ad: "ahmet", kisi_tel: "123321")
-       let k2 = Kisiler(kisi_id: 2, kisi_ad: "beyza", kisi_tel: "222222")
-       let k3 = Kisiler(kisi_id: 3, kisi_ad: "can", kisi_tel: "333333")
-       liste.append(k1)
-       liste.append(k2)
-       liste.append(k3)
-        kisilerListesi.onNext(liste)
+        db?.open()
+        var liste = [Kisiler]()
+        
+        do{
+            let rs = try db!.executeQuery("SELECT * FROM kisiler", values: nil)
+            
+            while rs.next() {
+                let kisi = Kisiler(kisi_id: Int(rs.string(forColumn: "kisi_id"))!,
+                                   kisi_ad: rs.string(forColumn: "kisi_ad")!,
+                                   kisi_tel: rs.string(forColumn: "kisi_tel")!)
+                
+                liste.append(kisi)
+            }
+            
+            kisilerListesi.onNext(liste)//Tetikleme
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        db?.close()
     }
 }

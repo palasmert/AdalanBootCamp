@@ -79,7 +79,7 @@ extension AnaSayfa : UITableViewDelegate,UITableViewDataSource {
             alert.addAction(iptalAction)
             
             let evetAction = UIAlertAction(title: "Evet", style: .destructive) { action in
-                self.viewModel.siil(kisi_id: kisi.kisi_id!)
+                self.viewModel.sil(kisi_id: kisi.kisi_id!)
             }
             alert.addAction(evetAction)
             self.present(alert, animated: true)
